@@ -1,0 +1,3 @@
+Cottizador de Cocktail y Estimador de cantidades
+
+El objetivo de este sitio es poder brindar la posibilidad de poder indicar lo ingrendientes de un determinado cocktail y de esa manera poder cotizar el precio que deberia tener para su venta, como asi tambien permitir indicar cuantos cocktails se quieren realizar y en base a la cantidades requeridas de cada bebida y lo que se tiene disponible, determinar cuantos cocktails voy a ser capaz de preparar.
