@@ -1,0 +1,22 @@
+
+div#UploadCockailForm{
+    background-color: black;
+}
+
+div#toastCorfimacionUaploadCocktail {
+    color: black;
+}
+
+button#btnModalIngrediente {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+button#btnCargarCocktail {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+div {
+    color: white;
+}

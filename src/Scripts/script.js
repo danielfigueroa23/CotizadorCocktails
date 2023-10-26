@@ -17,78 +17,119 @@ function Ingredient(name,cantidad,precio) {
     this.precio = precio;
 }
 
+//Definimos el array que se va a usar para los ingredientes
+const listIngredientes = [];
+localStorage.setItem('Ingredientes',  JSON.stringify(listIngredientes));
+
+//Definimos el array que se va a contener los cocktails
+const listCoktails = [];
+localStorage.setItem('Cocktails', JSON.stringify(listCoktails));
+
+
+
+let btnAddIngrediente = document.getElementById("BtnCargarIngrediente");
+btnAddIngrediente.onclick = () => {
+    cargarIngrediente();
+}
+
+// Funcion para cargar ingrendientes
+const cargarIngrediente = () => {
+
+    //Recuperamos el array de ingredientes
+    let listIngredientes = [];
+    listIngredientes = localStorage.getItem("Ingredientes");
+    listIngredientes =  JSON.parse(listIngredientes);
+
+    // Recuperamos los datos desde el DOM
+    let ingrediente = document.getElementById("nombreIngrediente").value; 
+    let cantidad = document.getElementById("Cantidad").value;
+    let precio = document.getElementById("Precio").value;
+
+
+    const ingredient = new Ingredient(ingrediente,cantidad,precio);
+
+    const ingredientfinal = {
+        nombreIngrediente : ingredient.name, 
+        cantidad: ingredient.cantidad, 
+        precio: ingredient.precio
+    }; 
+
+    listIngredientes.push(ingredientfinal);
+
+    // Cargamos el ingrediente en el LocalStorage
+    localStorage.setItem('Ingredientes', JSON.stringify(listIngredientes));
+
+    //Lo agregamos a traves del DOM a la tabla
+    let tableIngreditentes = document.getElementById("tableIngredientes");
+
+    tableIngreditentes.innerHTML +=  `<tr>
+                                        <td>${ingredient.name}</td>
+                                        <td>${ingredient.cantidad} Oz</td>
+                                        <td>$ ${ingredient.precio}</td>
+                                         </tr> `
+
+
+    $('#ingredienteModal').modal('hide');
+
+    document.getElementById("nombreIngrediente").value = "";
+    document.getElementById("Cantidad").value = "";
+    document.getElementById("Precio").value = "";
+
+}; 
+
+let btnAddCocktail = document.getElementById("btnCargarCocktail");
+btnAddCocktail.onclick = () => {
+    cargarCocktail();
+}
+
+
 
 //Cargamos un cocktail nuevo
 const cargarCocktail = () => {
 
     const cocktail = new Cocktail();
 
-    // Solicitamos al usuario el nombre del cocktail 
-    const nombreCocktail = prompt("Como se llama el Cocktail?")
+    // Recuperamo el nombre del cocktail 
+    const nombreCocktail = document.getElementById("nombreCocktail").value;
     cocktail.name = nombreCocktail;
 
-    //invocamos la funcion para cargar los ingredientes
-    const ingredientes = cargarIngrediente(nombreCocktail);
-    cocktail.ingredients = ingredientes;
+    //Recuperamos lo ingredientes
+    let listIngredientes = [];
+    listIngredientes = localStorage.getItem("Ingredientes");
+    listIngredientes =  JSON.parse(listIngredientes);
 
-    // Solicitamos al usuario la cristaleria utilizada
-    const cristaleria = prompt("Que cristaleria se utiliza?");
+    cocktail.ingredients = listIngredientes;
+
+    //Recuperamos la cristaleria indicada por el usuario
+    const cristaleria = document.getElementById("Cristeleria").value;
     cocktail.cristaleria = cristaleria;
 
     //Reccorremos la lista de ingredientes para calcular el precio del cocktail
-    for (var i = 0; i < ingredientes.length; i ++) {
-        total = total + ingredientes[i].precio;
+    for (var i = 0; i < listIngredientes.length; i ++) {
+        total = total + listIngredientes[i].precio;
     }
     
     total = (total * porcentaje / 100);
     cocktail.precio = total;
 
-    //Mostramos el resultado final al usuario
-    mostrarResultado(cocktail);
+    // Guardamos el cocktail en el localStorage
+    let listCocktails = [];
+    listCocktails = localStorage.getItem("Cocktails");
+    listCocktails =  JSON.parse(listCocktails);
+
+    listCocktails.push(cocktail);
+
+    localStorage.setItem('Cocktails', JSON.stringify(listCocktails));
+    
+    //Confirmamos al usuario que se cargo correctamente su cocktail y limpiamos los campos
+    setTimeout(function(){
+        $('#liveToast').toast('show');
+        document.getElementById("nombreCocktail").value = "";
+        document.getElementById("tableIngredientes").innerHTML = "";
+        document.getElementById("Cristeleria").value = "";
+    }, 2000);
 
 }
-
-
-
-// Funcion para cargar ingrendientes
-const cargarIngrediente = (nombreCocktail) => {
-
-    //Array de ingredientes de un cocktail
-    const ingredientes = [];
-
-    // Solicitamos un ingrediente
-    let ingrediente= prompt("Ingrese un ingrediente de " + nombreCocktail);
-    let cantidad = parseFloat(prompt("Ingrese la cantidad de " + ingrediente + "que lleva" + nombreCocktail + " (en onzas)"));
-    let precio = parseFloat(prompt("Ingrese el precio de " + ingrediente));
-
-    const ingredient = new Ingredient(ingrediente,cantidad,precio);
-
-
-    //agregamos el ingrediente al array
-    ingredientes.push(ingredient);
-
-    //Preguntamos si quiere cargar mas ingredientes
-    let continuar = prompt("Desea cargar mas ingredientes?").toUpperCase();
-
-
-    while (continuar == 'SI') {
-        ingrediente= prompt("Ingrese un ingrediente de " + nombreCocktail);
-        cantidad = parseFloat(prompt("Ingrese la cantidad de " + ingrediente + "que lleva" + nombreCocktail + " (en onzas)"));
-        precio = parseFloat(prompt("Ingrese el precio de " + ingrediente));
-        
-        const ingredient = new Ingredient(ingrediente,cantidad,precio);
-        
-        //agregamos el ingrediente al array
-        ingredientes.push(ingredient);
-
-        continuar = prompt("Desea cargar mas ingredientes?").toUpperCase();
-    }
-
-    if (continuar == 'NO') {
-        return ingredientes;
-    }
-
-}; 
 
 
 //Funcion para mostrar el resultado en pantalla al usuario
@@ -106,11 +147,7 @@ const mostrarResultado = (cocktail) => {
     });
     
     console.table(cocktail.ingredients);
-} 
-
-
-// Llamamos a la funcion para cargar un cocktail.
-cargarCocktail();
+}
 
 
 

@@ -1,0 +1,40 @@
+
+div#titlePrincipal {
+    color: white;
+    text-align: center;
+    background-color: black;
+    border-radius: 10px;
+}
+
+div#boxCargarCocktail {
+    text-align: center;
+}
+
+div#boxCargarCocktail p {
+    margin-top: 25px;
+    color: chocolate;
+}
+
+div#BoxVerBebidas {
+    text-align: center;
+}
+
+div#BoxVerBebidas p {
+    margin-top: 25px;
+    color: chocolate;
+}
+
+
+div#BoxVerCocktails {
+    text-align: center;
+}
+
+div#BoxVerCocktails p {
+    margin-top: 25px;
+    color: chocolate;
+}
+
+a {
+    color: white;
+    text-decoration:none;
+}
