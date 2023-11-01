@@ -123,7 +123,7 @@ const cargarCocktail = () => {
     
     //Confirmamos al usuario que se cargo correctamente su cocktail y limpiamos los campos
     setTimeout(function(){
-        $('#liveToast').toast('show');
+        mostrarResultado(cocktail);
         document.getElementById("nombreCocktail").value = "";
         document.getElementById("tableIngredientes").innerHTML = "";
         document.getElementById("Cristeleria").value = "";
@@ -134,7 +134,6 @@ const cargarCocktail = () => {
 
 //Funcion para mostrar el resultado en pantalla al usuario
 const mostrarResultado = (cocktail) => {
-    alert("El precio final de " + cocktail.name + " es de " + cocktail.precio);
     
     //Antes de mostrar los ingredientes los ordenamos con el metodo sort (Función de Orden Superior)
     cocktail.ingredients.sort((primero, segundo) => {
@@ -145,8 +144,27 @@ const mostrarResultado = (cocktail) => {
             return 0;
         }
     });
+
+    let toastCocktails = document.getElementById("toastCorfimacionUaploadCocktail");
+
+    toastCocktails.innerHTML += ` El Cocktail fue Cargado Correctamente.
+                                  </br>
+                                  El precio Final es de ${cocktail.precio}
+                                  </br>
+                                  Sus Ingrediente son:
+                                  </br> `
+    let listIngredientes = [];
+    listIngredientes = cocktail.ingredients;
+
+    //Recorremos la lista de ingredientes para mostrarlo al cliente
+    for (var i = 0; i < listIngredientes.length; i ++) {
+        toastCocktails.innerHTML +=  `<tr>
+                                        <td>${listIngredientes[i].nombreIngrediente}</td>
+                                        </br>
+                                     </tr> `
+    }
     
-    console.table(cocktail.ingredients);
+    $('#liveToast').toast('show');
 }
 
 
