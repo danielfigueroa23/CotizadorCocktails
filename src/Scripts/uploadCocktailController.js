@@ -1,6 +1,6 @@
 //Definimos variables que luego utilizaremos
 let total = 0;
-const porcentaje = 0.40;
+const porcentaje = 40; //Porcentaje de ganacia sobre el precio de costo
 
 
 // Segunda Pre-Entrega : Creamos el constructor para el objeto Cocktail
@@ -17,16 +17,6 @@ function Ingredient(name,cantidad,precio) {
     this.precio = precio;
 }
 
-//Definimos el array que se va a usar para los ingredientes
-const listIngredientes = [];
-localStorage.setItem('Ingredientes',  JSON.stringify(listIngredientes));
-
-//Definimos el array que se va a contener los cocktails
-const listCoktails = [];
-localStorage.setItem('Cocktails', JSON.stringify(listCoktails));
-
-
-
 let btnAddIngrediente = document.getElementById("BtnCargarIngrediente");
 btnAddIngrediente.onclick = () => {
     cargarIngrediente();
@@ -38,7 +28,12 @@ const cargarIngrediente = () => {
     //Recuperamos el array de ingredientes
     let listIngredientes = [];
     listIngredientes = localStorage.getItem("Ingredientes");
-    listIngredientes =  JSON.parse(listIngredientes);
+    
+    if (listIngredientes != null) {
+        listIngredientes =  JSON.parse(listIngredientes);
+    } else {
+        listIngredientes =  [];
+    }
 
     // Recuperamos los datos desde el DOM
     let ingrediente = document.getElementById("nombreIngrediente").value; 
@@ -106,16 +101,21 @@ const cargarCocktail = () => {
 
     //Reccorremos la lista de ingredientes para calcular el precio del cocktail
     for (var i = 0; i < listIngredientes.length; i ++) {
-        total = total + listIngredientes[i].precio;
+        total = total + Number(listIngredientes[i].precio);
     }
     
-    total = (total * porcentaje / 100);
+    total = total + (( porcentaje / 100)* total);
     cocktail.precio = total;
 
     // Guardamos el cocktail en el localStorage
     let listCocktails = [];
     listCocktails = localStorage.getItem("Cocktails");
-    listCocktails =  JSON.parse(listCocktails);
+    
+    if (listCocktails != null ) {
+        listCocktails =  JSON.parse(listCocktails);
+    } else {
+        listCocktails = [];
+    }
 
     listCocktails.push(cocktail);
 
@@ -127,6 +127,7 @@ const cargarCocktail = () => {
         document.getElementById("nombreCocktail").value = "";
         document.getElementById("tableIngredientes").innerHTML = "";
         document.getElementById("Cristeleria").value = "";
+        localStorage.removeItem("Ingredientes");
     }, 2000);
 
 }
@@ -147,7 +148,7 @@ const mostrarResultado = (cocktail) => {
 
     let toastCocktails = document.getElementById("toastCorfimacionUaploadCocktail");
 
-    toastCocktails.innerHTML += ` El Cocktail fue Cargado Correctamente.
+    toastCocktails.innerHTML = ` El Cocktail fue Cargado Correctamente.
                                   </br>
                                   El precio Final es de ${cocktail.precio}
                                   </br>
@@ -156,15 +157,29 @@ const mostrarResultado = (cocktail) => {
     let listIngredientes = [];
     listIngredientes = cocktail.ingredients;
 
+    let listadeIngredientes = '';
     //Recorremos la lista de ingredientes para mostrarlo al cliente
     for (var i = 0; i < listIngredientes.length; i ++) {
         toastCocktails.innerHTML +=  `<tr>
                                         <td>${listIngredientes[i].nombreIngrediente}</td>
                                         </br>
                                      </tr> `
+        listadeIngredientes += listIngredientes[i].nombreIngrediente + " \n";
     }
-    
-    $('#liveToast').toast('show');
+
+    var str="El precio es de: \n" +
+            "$" + cocktail.precio+'\n' +
+            "Los ingredientes de " + cocktail.name+ " son: "+"\n"
+            + " \n" + listadeIngredientes +'\n';
+            
+    Swal.fire({
+        title: "El Cocktail fue Cargado Correctamente.",
+        icon: "success",
+        html: '<pre>' + str + '</pre>',
+        customClass: {
+            popup: 'format-pre'
+        }
+    });
 }
 
 

@@ -1,6 +1,7 @@
 
 div#UploadCockailForm{
     background-color: black;
+    border-radius: 10px;
 }
 
 div#toastCorfimacionUaploadCocktail {
@@ -19,4 +20,22 @@ button#btnCargarCocktail {
 
 div {
     color: white;
+}
+
+.format-pre pre {
+    background: #49483e;
+    color: #f7f7f7;
+    padding: 10px;
+    font-size: 14px;
+}
+
+img#imgUploadCocktail {
+    width: 100%;
+    height:90%;
+    border-radius: 40px;
+    margin-top: 15px;
+}
+
+div#containerUploadCocktail {
+    margin-top: 20px;
 }

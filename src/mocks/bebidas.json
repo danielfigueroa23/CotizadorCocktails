@@ -1,0 +1,87 @@
+[
+    {
+        "nombre": "Aperol",
+        "categoria": "Aperitivo",
+        "capacidad": "750 CC",
+        "precio": 4500,
+        "imagen": "../Images/Aperol.png"
+    },
+    {
+        "nombre": "Fernet Branca",
+        "categoria": "Aperitivo",
+        "capacidad": "750 CC",
+        "precio": 5000,
+        "imagen": "../Images/Fernet-Branca.jpg"
+    },
+    {
+        "nombre": "Campari",
+        "categoria": "Aperitivo",
+        "capacidad": "750 CC",
+        "precio": 2500,
+        "imagen": "../Images/Campari.jpg"
+    },
+    {
+        "nombre": "Vodka Sernova",
+        "categoria": "Aguardiente",
+        "capacidad": "750 CC",
+        "precio": 2500,
+        "imagen": "../Images/Vodka.jpg"
+    },
+    {
+        "nombre": "Gin Peregrino",
+        "categoria": "Aguardiente",
+        "capacidad": "750 CC",
+        "precio": 5000,
+        "imagen": "../Images/Gin-Peregrino.png"
+    },
+    {
+        "nombre": "Whisky Jameson",
+        "categoria": "Aguardiente",
+        "capacidad": "750 CC",
+        "precio": 3000,
+        "imagen": "../Images/Jameson.jpeg"
+    },
+    {
+        "nombre": "Frangelico",
+        "categoria": "Licores",
+        "capacidad": "750 CC",
+        "precio": 3000,
+        "imagen": "../Images/Frangelico.jpg"
+    },
+    {
+        "nombre": "Gancia",
+        "categoria": "Aperitivo",
+        "capacidad": "750 CC",
+        "precio": 2200,
+        "imagen": "../Images/Gancia.jpg"
+    },
+    {
+        "nombre": "Ron Bacardi",
+        "categoria": "Aguardientes",
+        "capacidad": "750 CC",
+        "precio": 3000,
+        "imagen": "../Images/Ron-Bacardi.png"
+    },
+    {
+        "nombre": "Licor de Dulce de Leche Tambo",
+        "categoria": "Licores",
+        "capacidad": "750 CC",
+        "precio": 5800,
+        "imagen": "../Images/Licor-Tambo.jpg"
+    },
+    {
+        "nombre": "Tequila Jose Cuervo",
+        "categoria": "Aguardientes",
+        "capacidad": "750 CC",
+        "precio": 6000,
+        "imagen": "../Images/Tequila-JoseCuervo.png"
+    },
+    {
+        "nombre": "Gancia Hisbiscus",
+        "categoria": "Aperitivo",
+        "capacidad": "750 CC",
+        "precio": 3500,
+        "imagen": "../Images/Gancia-Hisbiscus.jpg"
+    }
+    
+]
