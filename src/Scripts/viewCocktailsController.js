@@ -9,13 +9,13 @@ const cargarCocktails = () => {
 
 
     //Recuperarmos la lista de cocktails para cargarlos en la tabla
-    for (var i = 0; i < listCocktails.length; i ++) {
+    for (let i = 0; i < listCocktails.length; i ++) {
         
         let listIngredients = [];
         listIngredients = listCocktails[i].ingredients;
         
         let ingredients = [];
-        for (var e = 0; e < listIngredients.length; e ++) {
+        for (let e = 0; e < listIngredients.length; e ++) {
             ingredients.push(listIngredients[e].nombreIngrediente);
         }
 

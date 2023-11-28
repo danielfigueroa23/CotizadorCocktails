@@ -100,7 +100,7 @@ const cargarCocktail = () => {
     cocktail.cristaleria = cristaleria;
 
     //Reccorremos la lista de ingredientes para calcular el precio del cocktail
-    for (var i = 0; i < listIngredientes.length; i ++) {
+    for (let i = 0; i < listIngredientes.length; i ++) {
         total = total + Number(listIngredientes[i].precio);
     }
     
@@ -159,7 +159,7 @@ const mostrarResultado = (cocktail) => {
 
     let listadeIngredientes = '';
     //Recorremos la lista de ingredientes para mostrarlo al cliente
-    for (var i = 0; i < listIngredientes.length; i ++) {
+    for (let i = 0; i < listIngredientes.length; i ++) {
         toastCocktails.innerHTML +=  `<tr>
                                         <td>${listIngredientes[i].nombreIngrediente}</td>
                                         </br>
